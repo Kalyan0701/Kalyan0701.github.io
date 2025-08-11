@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kalyan Khatry — Research Portfolio</title>
+  <meta name="description" content="Portfolio of Kalyan Khatry — research in Explainable AI, Deep Learning, and automated bridge inspection.">
+  <meta name="color-scheme" content="light dark">
+  <style>
+    /* ------- Base / Theme ------- */
+    :root {
+      --bg: #0b0c10;
+      --card: #111218;
+      --text: #e7e9ee;
+      --muted: #aab0c0;
+      --accent: #7c5cff; /* purple */
+      --accent-2: #5ce1e6; /* teal */
+      --ring: rgba(124, 92, 255, .35);
+      --shadow: 0 10px 30px rgba(0,0,0,.25);
+      --radius: 16px;
+      --maxw: 1100px;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f7f7fb;
+        --card: #ffffff;
+        --text: #0d1220;
+        --muted: #4b5567;
+        --accent: #5b4bdb;
+        --accent-2: #0ea5a5;
+        --ring: rgba(91,75,219,.25);
+        --shadow: 0 10px 30px rgba(18, 24, 40, .08);
+      }
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      background: radial-gradient(1200px 600px at 20% -10%, rgba(124,92,255,.10), transparent 60%),
+                  radial-gradient(800px 400px at 110% 10%, rgba(92,225,230,.10), transparent 70%),
+                  var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 20px; }
+
+    /* ------- Header / Nav ------- */
+    header {
+      position: sticky; top: 0; z-index: 50; backdrop-filter: blur(10px);
+      background: color-mix(in oklab, var(--bg) 75%, transparent);
+      border-bottom: 1px solid color-mix(in oklab, var(--text) 12%, transparent);
+    }
+    .nav { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 700; letter-spacing: .2px; }
+    .logo {
+      width: 36px; height: 36px; border-radius: 10px;
+      background: conic-gradient(from 220deg, var(--accent), var(--accent-2));
+      box-shadow: 0 6px 18px var(--ring);
+    }
+    .nav a { font-weight: 600; color: var(--text); opacity: .9; }
+    .links { display: flex; gap: 18px; }
+
+    /* ------- Hero ------- */
+    .hero { padding: 48px 0 18px; }
+    .hero h1 { font-size: clamp(28px, 4vw, 40px); line-height: 1.15; margin: 0 0 10px; }
+    .hero p { margin: 6px 0; color: var(--muted); }
+    .badges { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+    .badge {
+      display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 999px;
+      background: color-mix(in oklab, var(--card) 88%, transparent);
+      border: 1px solid color-mix(in oklab, var(--text) 14%, transparent);
+      box-shadow: var(--shadow);
+      font-size: 14px; color: var(--text);
+    }
+    .cta { display: flex; gap: 12px; margin-top: 22px; }
+    .btn { display: inline-flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 12px; font-weight: 700; }
+    .btn-primary { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: white; box-shadow: var(--shadow); border: none; }
+    .btn-ghost { border: 1px solid color-mix(in oklab, var(--text) 16%, transparent); color: var(--text); background: color-mix(in oklab, var(--card) 88%, transparent); }
+
+    /* ------- Sections ------- */
+    section { padding: 56px 0; }
+    section h2 { font-size: clamp(22px, 3vw, 28px); margin: 0 0 18px; letter-spacing: .3px; }
+    .section-desc { color: var(--muted); margin: 0 0 24px; }
+    .card-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 18px; }
+    .card {
+      grid-column: span 12; padding: 18px; border-radius: var(--radius);
+      background: var(--card); border: 1px solid color-mix(in oklab, var(--text) 14%, transparent);
+      box-shadow: var(--shadow);
+    }
+    @media (min-width: 700px) {
+      .card.sm-6 { grid-column: span 6; }
+      .card.sm-4 { grid-column: span 4; }
+    }
+    .card h3 { margin: 0 0 8px; font-size: 18px; }
+    .meta { color: var(--muted); font-size: 14px; margin-bottom: 8px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .tag { font-size: 12px; padding: 6px 10px; border-radius: 999px; background: color-mix(in oklab, var(--text) 8%, transparent); color: var(--text); border: 1px solid color-mix(in oklab, var(--text) 14%, transparent); }
+
+    /* ------- Lists ------- */
+    .list { display: grid; gap: 14px; }
+    .list-item { padding: 14px; border-radius: 12px; background: var(--card); border: 1px solid color-mix(in oklab, var(--text) 14%, transparent); }
+
+    /* ------- Footer ------- */
+    footer { padding: 40px 0 80px; color: var(--muted); text-align: center; }
+
+    /* ------- Utilities ------- */
+    .row { display: grid; gap: 18px; grid-template-columns: 1fr; }
+    @media (min-width: 900px) { .row { grid-template-columns: 2.2fr 1fr; } }
+    .muted { color: var(--muted); }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,1px,1px); white-space: nowrap; border: 0; }
+  </style>
+</head>
+<body>
+  <a class="sr-only" href="#content">Skip to content</a>
+  <header>
+    <div class="container nav">
+      <div class="brand"><span class="logo" aria-hidden="true"></span><span>Kalyan Khatry</span></div>
+      <nav class="links" aria-label="Primary">
+        <a href="#about">About</a>
+        <a href="#publications">Publications</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="content" class="container">
+    <!-- Hero -->
+    <section class="hero" id="about">
+      <h1>Hi, I’m Kalyan — researcher in <span style="background:linear-gradient(135deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent;">Explainable AI</span>, Deep Learning, and Computer Vision.</h1>
+      <p>I’m a Graduate Researcher (M.S. in Data Science, University of New Haven; expected Dec 2025) working on interpretable models for automated inspection of civil infrastructure. I love building practical, trustworthy AI — from Residual Vision Transformers (RvT) to robust evaluation with LIME/Grad‑CAM.</p>
+      <div class="badges">
+        <span class="badge">XAI for Bridge Inspection</span>
+        <span class="badge">Vision Transformers</span>
+        <span class="badge">PyTorch • Python • SQL</span>
+        <span class="badge">Power BI • AWS</span>
+      </div>
+      <div class="cta">
+        <a class="btn btn-primary" href="#publications">View Publications</a>
+        <a class="btn btn-ghost" href="https://github.com/Kalyan0701" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn btn-ghost" href="https://www.linkedin.com/in/kalyan-khatry-9aa49a211/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+
+      <div class="row" style="margin-top:26px">
+        <div>
+          <h2>Research Areas</h2>
+          <p class="section-desc">I focus on trustworthy vision systems for the built environment and beyond.</p>
+          <div class="card-grid">
+            <article class="card sm-6">
+              <h3>Explainable AI (XAI)</h3>
+              <p class="muted">Model interpretability for transformers and CNNs (LIME, Grad‑CAM), plus faithfulness metrics (Deletion/Insertion, Monotonicity, Comprehensiveness).</p>
+              <div class="tags"><span class="tag">LIME</span><span class="tag">Grad‑CAM</span><span class="tag">Faithfulness</span></div>
+            </article>
+            <article class="card sm-6">
+              <h3>Vision for Infrastructure</h3>
+              <p class="muted">UAS/UAV imagery, crack detection/classification, dataset curation, and deployment pipelines for real‑time bridge deck inspection.</p>
+              <div class="tags"><span class="tag">UAS</span><span class="tag">Crack Detection</span><span class="tag">Deployment</span></div>
+            </article>
+            <article class="card sm-6">
+              <h3>Efficient Transformers</h3>
+              <p class="muted">Residual Vision Transformers, CvT/ViT benchmarking, ablations on tokenization, depthwise projections, and optimization.</p>
+              <div class="tags"><span class="tag">RvT</span><span class="tag">ViT</span><span class="tag">CvT</span></div>
+            </article>
+            <article class="card sm-6">
+              <h3>Data Science & Analytics</h3>
+              <p class="muted">SQL/Power BI dashboards, ETL/ELT, and decision‑support analytics for nonprofits and enterprises.</p>
+              <div class="tags"><span class="tag">SQL</span><span class="tag">Power BI</span><span class="tag">ETL</span></div>
+            </article>
+          </div>
+        </div>
+        <aside>
+          <div class="card">
+            <h3>Currently</h3>
+            <ul class="list">
+              <li class="list-item">M.S. Data Science @ University of New Haven (GPA 3.87); graduating Dec 2025</li>
+              <li class="list-item">Research on XAI for RvT‑based crack detection with LIME/Grad‑CAM</li>
+              <li class="list-item">Data Analyst Intern (Spring) @ Downtown Evening Soup Kitchen</li>
+            </ul>
+          </div>
+          <div class="card" style="margin-top:18px">
+            <h3>Previously</h3>
+            <ul class="list">
+              <li class="list-item">Associate Data Engineer @ Krispcall (platform integrations, fraud detection)</li>
+              <li class="list-item">Research Assistant — Automated bridge inspection (UAS vision)</li>
+              <li class="list-item">B.Sc. (Hons) Information Management & B.Sc. Computer Science</li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Publications -->
+    <section id="publications">
+      <h2>Publications</h2>
+      <p class="section-desc">Selected papers and preprints. (Email me for manuscripts not yet public.)</p>
+      <div class="card-grid">
+        <article class="card sm-6">
+          <h3>Automated Concrete Bridge Deck Inspection Using UAS‑Collected Data: A Deep Learning (DL) Approach</h3>
+          <div class="meta">K. Khatry <span aria-hidden>•</span> 2025 <span aria-hidden>•</span> Under review</div>
+          <p class="muted">Compares Residual Vision Transformer (RvT) with CNN, ResNet50, ViT, and CvT for crack detection; includes XAI via LIME and Grad‑CAM plus faithfulness metrics.</p>
+          <div class="tags"><span class="tag">RvT</span><span class="tag">UAS</span><span class="tag">XAI</span></div>
+        </article>
+        <article class="card sm-6">
+          <h3>Breast Cancer Detection with CNNs: Model Comparison and Practical Considerations</h3>
+          <div class="meta">K. Khatry <span aria-hidden>•</span> 2023 <span aria-hidden>•</span> Undergraduate capstone / report</div>
+          <p class="muted">ResNet50 vs. VGG16 vs. LeNet on mammography; data augmentation and thresholding strategies.</p>
+          <div class="tags"><span class="tag">Medical Imaging</span><span class="tag">CNN</span></div>
+        </article>
+        <!-- Add more as needed -->
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects">
+      <h2>Projects</h2>
+      <p class="section-desc">A few things I’ve built or analyzed recently.</p>
+      <div class="card-grid">
+        <article class="card sm-4">
+          <h3>Residual Vision Transformer (RvT) for Crack Detection</h3>
+          <p class="muted">Custom PyTorch RvT with Convolutional Token Embedding, depthwise residual projections, and binary classifier (crack vs. no‑crack). 40k image dataset (METU‑based).</p>
+          <div class="tags"><span class="tag">PyTorch</span><span class="tag">Transformers</span><span class="tag">Vision</span></div>
+          <p><a href="https://github.com/Kalyan0701" target="_blank" rel="noopener">Code / notes</a></p>
+        </article>
+        <article class="card sm-4">
+          <h3>LIME & Grad‑CAM Toolkit + Faithfulness</h3>
+          <p class="muted">Unified pipeline to generate explanations and compute Deletion/Insertion curves, Monotonicity, and Comprehensiveness — with grid plots for batch visualization.</p>
+          <div class="tags"><span class="tag">XAI</span><span class="tag">Evaluation</span></div>
+          <p><a href="https://github.com/Kalyan0701" target="_blank" rel="noopener">Notebook</a></p>
+        </article>
+        <article class="card sm-4">
+          <h3>SQL + Power BI Sales Analytics</h3>
+          <p class="muted">End‑to‑end ETL, cleaning, and interactive dashboards: revenue trends, cohorts, ABC segmentation, and anomaly flags.</p>
+          <div class="tags"><span class="tag">SQL</span><span class="tag">Power BI</span><span class="tag">ETL</span></div>
+          <p><a href="https://public.tableau.com/app/profile/" target="_blank" rel="noopener">Dashboard (placeholder)</a></p>
+        </article>
+        <article class="card sm-4">
+          <h3>Resume‑Style Tableau Portfolio</h3>
+          <p class="muted">Interactive personal profile with maps, KPIs, and experience timelines.</p>
+          <div class="tags"><span class="tag">Tableau</span><span class="tag">Viz</span></div>
+          <p><a href="https://public.tableau.com/app/profile/" target="_blank" rel="noopener">View (placeholder)</a></p>
+        </article>
+        <article class="card sm-4">
+          <h3>ORB‑SLAM2 Experiments</h3>
+          <p class="muted">Running ORB‑SLAM2 with custom datasets and YAML on Windows; vocabulary integration and evaluation.</p>
+          <div class="tags"><span class="tag">SLAM</span><span class="tag">C++/Python</span></div>
+          <p><a href="https://github.com/Kalyan0701" target="_blank" rel="noopener">Notes</a></p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills">
+      <h2>Skills & Tools</h2>
+      <div class="card-grid">
+        <article class="card sm-6">
+          <h3>Programming</h3>
+          <p class="muted">Python, R, SQL, C/C++, LaTeX</p>
+          <div class="tags"><span class="tag">Pandas</span><span class="tag">NumPy</span><span class="tag">Matplotlib/Plotly</span><span class="tag">PyTorch</span><span class="tag">TensorFlow/Keras</span></div>
+        </article>
+        <article class="card sm-6">
+          <h3>Data & MLOps</h3>
+          <p class="muted">MongoDB, AWS, Spark, Apache, Git, Airflow (learning)</p>
+          <div class="tags"><span class="tag">ETL/ELT</span><span class="tag">Pipelines</span><span class="tag">Versioning</span></div>
+        </article>
+        <article class="card sm-6">
+          <h3>Analytics & BI</h3>
+          <p class="muted">Power BI, Tableau, Excel/Sheets (advanced), Mixpanel</p>
+          <div class="tags"><span class="tag">Dashboards</span><span class="tag">Storytelling</span></div>
+        </article>
+        <article class="card sm-6">
+          <h3>Soft Skills</h3>
+          <p class="muted">Research design, collaboration, teaching/mentoring, problem‑solving</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+      <h2>Contact</h2>
+      <div class="card-grid">
+        <article class="card sm-6">
+          <h3>Get in touch</h3>
+          <p class="muted">Open to research collaborations, PhD opportunities, and applied AI projects.</p>
+          <p><strong>Email:</strong> <a href="mailto:kalyan.khatry@outlook.com">kalyan.khatry@outlook.com</a> <span class="muted">(or DM on LinkedIn)</span></p>
+          <p>
+            <a href="https://github.com/Kalyan0701" target="_blank" rel="noopener">GitHub</a> ·
+            <a href="https://www.linkedin.com/in/kalyan-khatry-9aa49a211/" target="_blank" rel="noopener">LinkedIn</a>
+          </p>
+          <p class="muted">Location: New Haven, CT · Last updated: Aug 11, 2025</p>
+        </article>
+        <article class="card sm-6">
+          <h3>CV / Docs</h3>
+          <p class="muted">You can link your latest CV here.</p>
+          <p><a class="btn btn-ghost" href="#" onclick="alert('Replace this link with your CV URL (Google Drive or GitHub).'); return false;">Download CV (placeholder)</a></p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">© <span id="year"></span> Kalyan Khatry. Built with HTML/CSS. Hosted on GitHub Pages.</div>
+  </footer>
+
+  <!-- Minimal JS for small niceties -->
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
