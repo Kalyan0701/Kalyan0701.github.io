@@ -6,9 +6,7 @@
   <title>Kalyan Khatry | Academic Portfolio</title>
   <meta name="color-scheme" content="dark">
   <style>
-    /* Polished but simple (single file, GitHub Pages ready) */
     :root{
-      /* Dark theme only */
       --bg:#0f1220; --surface:#141828; --text:#e6e9f2; --muted:#98a3b8; --link:#60a5fa;
       --border:#22283a; --maxw:960px; --radius:12px; --accent:#60a5fa; --accent-soft:#0b1220;
     }
@@ -24,6 +22,7 @@
     .nav{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
     .nav a{margin-left:14px;color:var(--text);padding-bottom:6px;border-bottom:2px solid transparent} .nav a:hover{color:var(--link)} .nav a.active{color:var(--link);border-bottom-color:var(--link)}
     .brand{display:flex;align-items:center;gap:10px}
+    .brand strong{font-size:26px;font-weight:800;letter-spacing:.2px} 
     .brand-mark{width:18px;height:18px;border-radius:5px;background:linear-gradient(135deg,var(--accent),#06b6d4)}
     .actions{display:flex;align-items:center;gap:8px}
     .toggle{border:1px solid var(--border);background:var(--surface);padding:6px 10px;border-radius:999px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;font-weight:600;color:var(--text);line-height:1} .toggle .sun,.toggle .moon{font-size:16px} .toggle .moon{display:none} body.dark .toggle{background:#1f2937;border-color:#334155;color:#e6e9f2} body.dark .toggle .sun{display:none} body.dark .toggle .moon{display:inline}
@@ -71,7 +70,8 @@
     .role-card{border:1px solid var(--border);border-radius:10px;padding:12px;background:var(--surface)}
     .role-hd{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
     .role-title{font-weight:700}
-    .role-meta{color:var(--muted);font-size:12px}
+    .role-org{color:var(--muted);font-size:12px}
+    .role-submeta{color:var(--muted);font-size:12px;margin-top:4px}
     .role-card ul{margin:8px 0 0;padding-left:18px}
     .role-card li{margin:4px 0}
 
@@ -93,7 +93,7 @@
 <body>
   <header>
     <div class="container nav">
-      <div class="brand"><span class="brand-mark" aria-hidden="true"></span><strong>Kalyan Khatry</strong></div>
+      <div class="brand"><strong>Kalyan Khatry</strong></div>
       <nav aria-label="Primary">
         <a href="#about">About</a>
         <a href="#pubs">Publications</a>
@@ -122,12 +122,14 @@
     <section id="about">
       <h1>Kalyan Khatry</h1>
       <p class="muted">Graduate Researcher (M.S. Data Science, University of New Haven — expected Dec 2025)</p>
-      <p>I work on explainable AI and computer vision, with applications to automated inspection of civil infrastructure. Interests include Residual Vision Transformers, model explainability (LIME, Grad‑CAM), and quantitative evaluation of explanations (deletion/insertion, monotonicity, comprehensiveness).</p>
+      <p>I’m a graduate researcher in <strong>AI/ML</strong> and <strong>generative AI (GenAI)</strong>, with focus areas in <strong>explainable AI (XAI)</strong>, <strong>computer vision</strong>, and applied analytics. I build models that are accurate, interpretable, and deployable—across domains like infrastructure, health, and education. Current interests include vision transformers, robust explanation evaluation, and practical ML systems.</p>
       <div class="tags" aria-label="Keywords">
-        <span class="tag">Explainable AI</span>
-        <span class="tag">Vision Transformers</span>
+        <span class="tag">AI/ML</span>
+        <span class="tag">GenAI</span>
+        <span class="tag">XAI</span>
         <span class="tag">Computer Vision</span>
-        <span class="tag">UAS/UAV</span>
+        <span class="tag">NLP</span>
+        <span class="tag">Applied Analytics</span>
         <span class="tag">PyTorch</span>
       </div>
       <div class="card" style="margin-top:16px">
@@ -197,46 +199,50 @@
       <div class="roles">
         <div class="role-card">
           <div class="role-hd">
-            <div class="role-title">Research Assistant — Automated Bridge Inspection (UAS Vision)</div>
-            <div class="role-meta">University of New Haven · Current</div>
+            <div class="role-title">Research Assistant</div>
+            <div class="role-org">Samsami’s Lab</div>
           </div>
+          <div class="role-submeta">West Haven, CT · Sep 2024–Present</div>
           <ul>
-            <li>Prototyped a Residual Vision Transformer (RvT) pipeline for crack detection with reproducible training/evaluation scripts.</li>
-            <li>Implemented LIME & Grad‑CAM with faithfulness metrics (deletion/insertion, monotonicity, comprehensiveness).</li>
-            <li>Standardized UAS image preprocessing; organized datasets for consistent benchmarking.</li>
+            <li>Improved crack detection accuracy by 7% across multiple benchmarks by developing custom Residual Vision Transformer (RvT), CvT, and CNN models in PyTorch for UAV‑captured bridge imagery.</li>
+            <li>Increased model interpretability by integrating Grad‑CAM and LIME to highlight prediction‑relevant regions, aiding civil engineers in model validation.</li>
+            <li>Reduced false negatives in defect prediction by 15% via exploratory data analysis; identified spatial and texture‑based patterns using OpenCV, Pandas, and NumPy on 40,000+ high‑resolution images.</li>
           </ul>
         </div>
         <div class="role-card">
           <div class="role-hd">
-            <div class="role-title">Administrative Assistant — Admissions</div>
-            <div class="role-meta">University of New Haven · Current</div>
+            <div class="role-title">Administrative Assistant II</div>
+            <div class="role-org">University of New Haven</div>
           </div>
+          <div class="role-submeta">Admissions Dept · West Haven, CT · Mar 2024–Present</div>
           <ul>
-            <li>Supported the Admissions office with application data entry, document verification, and scheduling.</li>
-            <li>Managed communications with prospective students; coordinated campus visits and events.</li>
-            <li>Created quick reference sheets and tracking spreadsheets to streamline daily workflows.</li>
+            <li>Developed automated Power BI dashboards for admissions metrics, improving team efficiency by 15% and saving 10+ hours weekly on reporting tasks.</li>
+            <li>Analyzed admissions data using Slate CRM, identifying trends that enhanced prospective student engagement and informed recruitment strategies.</li>
+            <li>Handled timely communication with hundreds of prospective students on admissions, application procedures, deadlines, and program details.</li>
           </ul>
         </div>
         <div class="role-card">
           <div class="role-hd">
-            <div class="role-title">Data Analyst Intern</div>
-            <div class="role-meta">Downtown Evening Soup Kitchen · Spring 2025</div>
+            <div class="role-title">Data Analyst (Intern)</div>
+            <div class="role-org">Downtown Evening Soup Kitchen, Inc</div>
           </div>
+          <div class="role-submeta">New Haven, CT · Jan 2025–May 2025</div>
           <ul>
-            <li>Built SQL/Power BI dashboards for operations and program metrics.</li>
-            <li>Streamlined ETL steps and documentation to improve data quality and refresh cadence.</li>
-            <li>Partnered with stakeholders to define KPIs and actionable views.</li>
+            <li>Automated workflows using Zapier, Python, and Excel macros, integrating four business systems and reducing reporting time by 17% (25+ hours saved weekly).</li>
+            <li>Built Power BI dashboards with custom DAX measures and predictive analytics, enhancing KPI clarity across three departments.</li>
+            <li>Implemented data validation with Cognito Forms and MSSQL, improving accuracy across 15,000+ monthly records.</li>
           </ul>
         </div>
         <div class="role-card">
           <div class="role-hd">
             <div class="role-title">Associate Data Engineer</div>
-            <div class="role-meta">Krispcall · Past</div>
+            <div class="role-org">Krispcall Pte. Ltd</div>
           </div>
+          <div class="role-submeta">Singapore · Jul 2023–Dec 2023</div>
           <ul>
-            <li>Integrated Dynamics 365, Intercom, Salesforce, and Make to centralize events.</li>
-            <li>Contributed to fraud‑detection signals and user‑behavior analytics.</li>
-            <li>Maintained pipelines and version control practices across teams.</li>
+            <li>Integrated Mixpanel with Python for automated data retrieval/analysis, enabling insights that supported pricing strategy and a 7% increase in customer acquisition.</li>
+            <li>Led analysis of user interactions via Mixpanel + Python scripts, identifying 20+ fraud instances and improving platform security by 9%.</li>
+            <li>Optimized ETL processes, increasing data processing speed by 25% and supporting faster, more informed decisions.</li>
           </ul>
         </div>
       </div>
@@ -247,42 +253,46 @@
       <h2>Projects <span class="sub">Selected work</span></h2>
       <div class="projects">
         <article class="card project">
-          <div class="meta">PyTorch · Transformers · Vision</div>
-          <h3>Residual Vision Transformer for Crack Detection</h3>
-          <p class="muted">Custom RvT with convolutional token embedding & depthwise residual projections; binary classification on ~40k image patches derived from METU buildings.</p>
-          <div class="row">
-            <span class="pill">RvT</span><span class="pill">LIME/Grad‑CAM ready</span><span class="pill">224×224</span>
-          </div>
-          <div class="actions"><a class="iconbtn" href="https://github.com/Kalyan0701" target="_blank" rel="noopener" aria-label="View code">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5a12 12 0 0 0-3.79 23.4c.6.11.82-.26.82-.58v-2.02c-3.34.73-4.04-1.61-4.04-1.61-.55-1.41-1.34-1.78-1.34-1.78-1.09-.74.08-.73.08-.73 1.2.08 1.83 1.24 1.83 1.24 1.07 1.84 2.8 1.31 3.48 1 .11-.78.42-1.31.76-1.61-2.67-.31-5.48-1.34-5.48-5.95 0-1.31.47-2.38 1.24-3.22-.12-.31-.54-1.57.12-3.27 0 0 1.01-.32 3.3 1.23a11.4 11.4 0 0 1 6 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.7.24 2.96.12 3.27.77.84 1.24 1.91 1.24 3.22 0 4.62-2.81 5.63-5.49 5.94.43.38.81 1.11.81 2.24v3.32c0 .32.21.7.83.58A12 12 0 0 0 12 .5Z"/></svg>
-          </a></div>
+          <div class="meta">CNN · Medical Imaging</div>
+          <h3>Breast Cancer Detection Using Deep Learning</h3>
+          <p class="muted">Implemented LeNet, ResNet50, and VGG16 with advanced augmentation; tuned hyperparameters and used k‑fold cross‑validation on a medical imaging dataset.</p>
+          <div class="row"><span class="pill">LeNet</span><span class="pill">ResNet50</span><span class="pill">VGG16</span><span class="pill">K‑fold CV</span></div>
+          
         </article>
         <article class="card project">
-          <div class="meta">XAI · Evaluation</div>
-          <h3>LIME/Grad‑CAM Toolkit with Faithfulness Metrics</h3>
-          <p class="muted">Unified pipeline to generate explanations and compute deletion/insertion, monotonicity, and comprehensiveness. Batch visualization with grid plots.</p>
-          <div class="row"><span class="pill">LIME</span><span class="pill">Grad‑CAM</span><span class="pill">Metrics</span></div>
-          <div class="actions"><a class="iconbtn" href="https://github.com/Kalyan0701" target="_blank" rel="noopener" aria-label="View notebook">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5a12 12 0 0 0-3.79 23.4c.6.11.82-.26.82-.58v-2.02c-3.34.73-4.04-1.61-4.04-1.61-.55-1.41-1.34-1.78-1.34-1.78-1.09-.74.08-.73.08-.73 1.2.08 1.83 1.24 1.83 1.24 1.07 1.84 2.8 1.31 3.48 1 .11-.78.42-1.31.76-1.61-2.67-.31-5.48-1.34-5.48-5.95 0-1.31.47-2.38 1.24-3.22-.12-.31-.54-1.57.12-3.27 0 0 1.01-.32 3.3 1.23a11.4 11.4 0 0 1 6 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.7.24 2.96.12 3.27.77.84 1.24 1.91 1.24 3.22 0 4.62-2.81 5.63-5.49 5.94.43.38.81 1.11.81 2.24v3.32c0 .32.21.7.83.58A12 12 0 0 0 12 .5Z"/></svg>
-          </a></div>
+          <div class="meta">NLP · RNN/LSTM</div>
+          <h3>Sentiment Analysis with Recurrent Neural Networks</h3>
+          <p class="muted">Designed and trained an LSTM for sentiment classification on the IMDB reviews dataset; preprocessing pipeline for tokenization, padding, and batching.</p>
+          <div class="row"><span class="pill">LSTM</span><span class="pill">IMDB</span><span class="pill">Text preprocessing</span></div>
+          
         </article>
         <article class="card project">
           <div class="meta">SQL · Power BI</div>
           <h3>Pizza Sales Analytics Dashboard</h3>
-          <p class="muted">SQL‑based KPIs and interactive Power BI dashboards tracking revenue, order values, and sales trends across sizes and types.</p>
+          <p class="muted">Engineered SQL‑based KPI analytics and Power BI dashboards to track revenue, order values, and sales trends across sizes and types.</p>
           <div class="row"><span class="pill">ETL</span><span class="pill">DAX</span><span class="pill">Visualization</span></div>
-          <div class="actions"><a class="iconbtn" href="#" onclick="alert('Replace with dashboard link.'); return false;" aria-label="View dashboard">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h18v18H3V3Zm2 2v14h14V5H5Zm2 2h2v10H7V7Zm4 4h2v6h-2v-6Zm4-3h2v9h-2V8Z"/></svg>
-          </a></div>
+          
         </article>
         <article class="card project">
           <div class="meta">AWS · Spark</div>
-          <h3>Data Engineering Pipeline</h3>
-          <p class="muted">Scalable ETL using AWS Lambda for storage/processing and Apache Spark to analyze a YouTube dataset.</p>
+          <h3>Data Engineering Pipeline (AWS & Apache Spark)</h3>
+          <p class="muted">Implemented scalable data pipelines and ETL using AWS Lambda for storage/processing, and Apache Spark to analyze a YouTube dataset.</p>
           <div class="row"><span class="pill">Lambda</span><span class="pill">S3</span><span class="pill">Spark</span></div>
-          <div class="actions"><a class="iconbtn" href="#" onclick="alert('Add repo or doc link.'); return false;" aria-label="View repo">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5a12 12 0 0 0-3.79 23.4c.6.11.82-.26.82-.58v-2.02c-3.34.73-4.04-1.61-4.04-1.61-.55-1.41-1.34-1.78-1.34-1.78-1.09-.74.08-.73.08-.73 1.2.08 1.83 1.24 1.83 1.24 1.07 1.84 2.8 1.31 3.48 1 .11-.78.42-1.31.76-1.61-2.67-.31-5.48-1.34-5.48-5.95 0-1.31.47-2.38 1.24-3.22-.12-.31-.54-1.57.12-3.27 0 0 1.01-.32 3.3 1.23a11.4 11.4 0 0 1 6 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.7.24 2.96.12 3.27.77.84 1.24 1.91 1.24 3.22 0 4.62-2.81 5.63-5.49 5.94.43.38.81 1.11.81 2.24v3.32c0 .32.21.7.83.58A12 12 0 0 0 12 .5Z"/></svg>
-          </a></div>
+          
+        </article>
+        <article class="card project">
+          <div class="meta">Health Analytics · R</div>
+          <h3>Esophageal Cancer Dataset Analysis</h3>
+          <p class="muted">Exploratory analysis and modeling on an esophageal cancer dataset; data cleaning, visualization, and statistical testing in R.</p>
+          <div class="row"><span class="pill">R</span><span class="pill">EDA</span><span class="pill">Stats</span></div>
+          <div class="actions"><a class="iconbtn" href="#" onclick="alert('Add report or repo link.'); return false;" aria-label="View report"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h18v18H3V3Zm2 2v14h14V5H5Zm2 2h2v10H7V7Zm4 4h2v6h-2v-6Zm4-3h2v9h-2V8Z"/></svg></a></div>
+        </article>
+        <article class="card project">
+          <div class="meta">Health Analytics · R</div>
+          <h3>Employment & Mortality Analysis (R)</h3>
+          <p class="muted">Data exploration and modeling to examine relationships between employment indicators and mortality outcomes using R.</p>
+          <div class="row"><span class="pill">R</span><span class="pill">Regression</span><span class="pill">Visualization</span></div>
+          <div class="actions"><a class="iconbtn" href="#" onclick="alert('Add report or repo link.'); return false;" aria-label="View report"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h18v18H3V3Zm2 2v14h14V5H5Zm2 2h2v10H7V7Zm4 4h2v6h-2v-6Zm4-3h2v9h-2V8Z"/></svg></a></div>
         </article>
       </div>
     </section>
@@ -294,7 +304,7 @@
         <div class="card">
           <h3>Programming & ML</h3>
           <div class="tags">
-            <span class="tag">Python</span><span class="tag">R</span><span class="tag">SQL</span><span class="tag">C/C++</span>
+            <span class="tag">Python</span><span class="tag">R</span><span class="tag">SQL</span>
             <span class="tag">PyTorch</span><span class="tag">TensorFlow/Keras</span><span class="tag">scikit‑learn</span>
             <span class="tag">Pandas</span><span class="tag">NumPy</span><span class="tag">Matplotlib</span><span class="tag">Plotly</span>
           </div>
