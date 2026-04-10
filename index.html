@@ -1,423 +1,1205 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Kalyan Khatry | Academic Portfolio</title>
-  <meta name="color-scheme" content="dark">
-  <style>
-    :root{
-      /* Dark theme only */
-      --bg:#0f1220; --surface:#141828; --text:#e6e9f2; --muted:#98a3b8; --link:#60a5fa;
-      --border:#22283a; --maxw:960px; --radius:12px; --accent:#60a5fa; --accent-soft:#0b1220;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kalyan Khatry — AI & Infrastructure Researcher</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F7F5F0;
+    --bg-alt: #EDEAE3;
+    --text: #2C2C2C;
+    --text-soft: #6B6B6B;
+    --accent: #3A6B4C;
+    --accent-light: #5A9E6F;
+    --accent-bg: #E8F0EA;
+    --warm: #C4956A;
+    --warm-light: #F0E6D9;
+    --border: #D8D4CC;
+    --white: #FFFFFF;
+    --serif: 'Instrument Serif', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+  }
+
+  body {
+    font-family: var(--sans);
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.7;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    opacity: 0.025;
+    z-index: 9999;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(247, 245, 240, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    transition: all 0.3s ease;
+  }
+
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 1.35rem;
+    color: var(--text);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--text-soft);
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+    position: relative;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1.5px;
+    background: var(--accent);
+    transition: width 0.3s ease;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+  .nav-links a:hover::after { width: 100%; }
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+  }
+  .hamburger span {
+    width: 22px;
+    height: 2px;
+    background: var(--text);
+    transition: all 0.3s;
+    border-radius: 2px;
+  }
+
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    top: -10%; right: -15%;
+    width: 700px; height: 700px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(58,107,76,0.06) 0%, transparent 70%);
+    animation: float 12s ease-in-out infinite;
+  }
+
+  .hero-bg-2 {
+    position: absolute;
+    bottom: -20%; left: -10%;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(196,149,106,0.06) 0%, transparent 70%);
+    animation: float 15s ease-in-out infinite reverse;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(30px, -20px); }
+  }
+
+  .hero-layout {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    padding-top: 100px;
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .hero-photo-wrapper {
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 1s;
+  }
+
+  .hero-photo {
+    width: 280px;
+    height: 340px;
+    border-radius: 16px;
+    object-fit: cover;
+    object-position: center top;
+    border: 3px solid var(--border);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.08), 0 0 0 8px rgba(58,107,76,0.04);
+    transition: all 0.4s ease;
+  }
+
+  .hero-photo:hover {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 28px 60px rgba(0,0,0,0.1), 0 0 0 8px rgba(58,107,76,0.07);
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.2s;
+  }
+
+  .hero-tag .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent-light);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.3); }
+  }
+
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    font-weight: 400;
+    max-width: 700px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.4s;
+  }
+
+  .hero h1 em { font-style: italic; color: var(--accent); }
+
+  .hero-sub {
+    max-width: 540px;
+    margin-top: 1.8rem;
+    font-size: 1.05rem;
+    color: var(--text-soft);
+    line-height: 1.8;
+    font-weight: 300;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.6s;
+  }
+
+  .hero-actions {
+    margin-top: 2.5rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.8s;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0.75rem 1.6rem;
+    font-size: 0.88rem;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    font-family: var(--sans);
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: var(--white);
+  }
+  .btn-primary:hover {
+    background: #2F5A3F;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(58,107,76,0.2);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--text);
+    border: 1.5px solid var(--border);
+  }
+  .btn-ghost:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .hero-meta {
+    margin-top: 3rem;
+    display: flex;
+    gap: 3rem;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 1s;
+  }
+
+  .hero-meta-item { display: flex; flex-direction: column; }
+
+  .hero-meta-item .label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-soft);
+    margin-bottom: 0.25rem;
+  }
+
+  .hero-meta-item .value {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    color: var(--text);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  section { padding: 6rem 2rem; }
+
+  .container { max-width: 1200px; margin: 0 auto; }
+
+  .section-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+  }
+
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    letter-spacing: -0.02em;
+    font-weight: 400;
+    line-height: 1.15;
+  }
+
+  .section-header { margin-bottom: 3.5rem; }
+
+  #about {
+    background: var(--white);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .about-text p {
+    color: var(--text-soft);
+    font-size: 1.02rem;
+    margin-bottom: 1.2rem;
+    font-weight: 300;
+    line-height: 1.85;
+  }
+
+  .about-values {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+    margin-top: 2rem;
+  }
+
+  .value-card {
+    padding: 1.4rem;
+    border-radius: 10px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    transition: all 0.3s ease;
+  }
+
+  .value-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(58,107,76,0.06);
+  }
+
+  .value-card .icon { font-size: 1.3rem; margin-bottom: 0.6rem; display: block; }
+  .value-card h4 { font-size: 0.88rem; font-weight: 600; margin-bottom: 0.3rem; }
+  .value-card p { font-size: 0.78rem; color: var(--text-soft); line-height: 1.6; }
+
+  .research-areas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .research-card {
+    padding: 2rem;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--white);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .research-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-light));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+
+  .research-card:hover::before { transform: scaleX(1); }
+
+  .research-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.06);
+    border-color: transparent;
+  }
+
+  .research-card .num {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .research-card h3 {
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    margin-bottom: 0.7rem;
+    font-weight: 400;
+  }
+
+  .research-card p {
+    font-size: 0.88rem;
+    color: var(--text-soft);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  #publications {
+    background: var(--white);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .pub-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .pub-item {
+    padding: 1.5rem 2rem;
+    background: var(--white);
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 1.5rem;
+    align-items: start;
+    transition: background 0.3s;
+  }
+
+  .pub-item:hover { background: var(--bg); }
+
+  .pub-type {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--white);
+    background: var(--accent);
+    padding: 3px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+    margin-top: 3px;
+  }
+
+  .pub-type.preprint { background: var(--warm); }
+
+  .pub-info h4 {
+    font-size: 0.95rem;
+    font-weight: 500;
+    line-height: 1.5;
+    margin-bottom: 0.3rem;
+  }
+
+  .pub-info h4 a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .pub-info h4 a:hover { color: var(--accent); }
+
+  .pub-info .venue {
+    font-size: 0.82rem;
+    color: var(--text-soft);
+    font-style: italic;
+  }
+
+  .pub-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.72rem;
+    font-family: var(--mono);
+    color: var(--accent);
+    text-decoration: none;
+    margin-top: 0.4rem;
+    padding: 2px 8px;
+    border-radius: 3px;
+    background: var(--accent-bg);
+    transition: all 0.2s;
+  }
+
+  .pub-link:hover { background: var(--accent); color: var(--white); }
+
+  .pub-link svg { width: 11px; height: 11px; }
+
+  .pub-year {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--text-soft);
+    white-space: nowrap;
+  }
+
+  .timeline {
+    position: relative;
+    padding-left: 2.5rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 1.5px;
+    background: linear-gradient(180deg, var(--accent), var(--border));
+  }
+
+  .timeline-item {
+    position: relative;
+    padding-bottom: 3rem;
+  }
+
+  .timeline-item:last-child { padding-bottom: 0; }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -2.5rem;
+    top: 6px;
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--bg);
+    box-shadow: 0 0 0 3px rgba(58,107,76,0.15);
+  }
+
+  .timeline-item .date {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--accent);
+    margin-bottom: 0.4rem;
+  }
+
+  .timeline-item h3 {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin-bottom: 0.15rem;
+  }
+
+  .timeline-item .org {
+    font-size: 0.88rem;
+    color: var(--text-soft);
+    margin-bottom: 0.8rem;
+  }
+
+  .timeline-item ul { list-style: none; }
+
+  .timeline-item li {
+    font-size: 0.88rem;
+    color: var(--text-soft);
+    line-height: 1.7;
+    padding-left: 1rem;
+    position: relative;
+    margin-bottom: 0.4rem;
+    font-weight: 300;
+  }
+
+  .timeline-item li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--border);
+  }
+
+  #education {
+    background: var(--white);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .edu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .edu-card {
+    padding: 2rem;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--bg);
+    transition: all 0.3s;
+  }
+
+  .edu-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+  }
+
+  .edu-card .degree {
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    font-weight: 400;
+    margin-bottom: 0.3rem;
+  }
+
+  .edu-card .school {
+    font-size: 0.92rem;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+
+  .edu-card .details {
+    font-size: 0.82rem;
+    color: var(--text-soft);
+    line-height: 1.7;
+  }
+
+  .edu-card .gpa {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    background: var(--accent-bg);
+    color: var(--accent);
+    padding: 3px 10px;
+    border-radius: 4px;
+    margin-top: 0.8rem;
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .skill-group h4 {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+  .skill-tag {
+    font-size: 0.82rem;
+    padding: 0.4rem 0.9rem;
+    border-radius: 6px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-weight: 400;
+    transition: all 0.2s;
+  }
+
+  .skill-tag:hover {
+    border-color: var(--accent);
+    background: var(--accent-bg);
+    color: var(--accent);
+  }
+
+  .contact-section {
+    text-align: center;
+    padding: 6rem 2rem;
+  }
+
+  .contact-section .section-title { margin-bottom: 1rem; }
+
+  .contact-section p {
+    color: var(--text-soft);
+    max-width: 480px;
+    margin: 0 auto 2.5rem;
+    font-size: 1.02rem;
+    font-weight: 300;
+  }
+
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0.7rem 1.4rem;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--text);
+    font-size: 0.88rem;
+    font-weight: 500;
+    transition: all 0.3s;
+  }
+
+  .contact-link:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(58,107,76,0.1);
+  }
+
+  .contact-link svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+  footer {
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.78rem;
+    color: var(--text-soft);
+  }
+
+  .footer-leaf {
+    display: inline-block;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    opacity: 0.5;
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 900px) {
+    .hero-layout {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      text-align: center;
     }
-    
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;line-height:1.65;background:var(--bg);color:var(--text)}
-    a{color:var(--link);text-decoration:none}
-    a:hover{text-decoration:underline}
-    .container{width:100%;max-width:min(var(--maxw),96vw);margin-left:auto;margin-right:auto;padding:0 16px} 
+    .hero-photo-wrapper { order: -1; justify-self: center; }
+    .hero-photo { width: 200px; height: 240px; }
+    .hero-tag { justify-content: center; }
+    .hero h1 { margin: 0 auto; }
+    .hero-sub { margin-left: auto; margin-right: auto; }
+    .hero-actions { justify-content: center; }
+    .hero-meta { justify-content: center; }
+  }
 
-    header{border-bottom:1px solid var(--border);background:var(--surface);position:sticky;top:0;z-index:10;box-shadow:0 4px 14px rgba(2,8,23,.04)}
-    .nav{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
-    .nav a{margin-left:14px;color:var(--text);padding-bottom:6px;border-bottom:2px solid transparent} .nav a:hover{color:var(--link)} .nav a.active{color:var(--link);border-bottom-color:var(--link)}
-    .brand{display:flex;align-items:center;gap:10px}
-    .brand strong{font-size:26px;font-weight:800;letter-spacing:.2px} /* larger name in header */
-    .brand-mark{width:18px;height:18px;border-radius:5px;background:linear-gradient(135deg,var(--accent),#06b6d4)}
-    .actions{display:flex;align-items:center;gap:8px}
-    .toggle{border:1px solid var(--border);background:var(--surface);padding:6px 10px;border-radius:999px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;font-weight:600;color:var(--text);line-height:1} .toggle .sun,.toggle .moon{font-size:16px} .toggle .moon{display:none} body.dark .toggle{background:#1f2937;border-color:#334155;color:#e6e9f2} body.dark .toggle .sun{display:none} body.dark .toggle .moon{display:inline}
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .nav-links.open {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 64px; left: 0; right: 0;
+      background: rgba(247,245,240,0.97);
+      backdrop-filter: blur(20px);
+      padding: 1.5rem 2rem;
+      border-bottom: 1px solid var(--border);
+      gap: 1.2rem;
+    }
+    .hamburger { display: flex; }
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .edu-grid { grid-template-columns: 1fr; }
+    .hero-meta { gap: 2rem; }
+    .pub-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    .pub-type { justify-self: start; order: -1; }
+    .pub-year { order: -1; }
+    section { padding: 4rem 1.5rem; }
+  }
 
-    .iconbtn{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--text);outline:none} .iconbtn:focus-visible{outline:2px solid var(--link);outline-offset:2px} .iconbtn svg{width:18px;height:18px;fill:currentColor}
-    .iconbtn:hover{background:color-mix(in oklab,var(--link) 12%, var(--surface));border-color:color-mix(in oklab,var(--link) 35%, var(--border));text-decoration:none}
-    .iconbtn svg{width:18px;height:18px;fill:currentColor}
-
-    main section{padding:36px 0;scroll-margin-top:70px}
-    h1{font-size:32px;margin:10px 0 4px}
-    h2{font-size:22px;margin:0 0 12px;position:relative}
-    h2 .sub{display:block;font-weight:400;color:var(--muted);font-size:14px;margin-top:4px}
-    h2::after{content:"";display:block;height:2px;background:linear-gradient(90deg,var(--accent),transparent);margin-top:6px}
-    h3{font-size:16px;margin:16px 0 8px}
-    p.muted, .muted{color:var(--muted)}
-
-    .split{display:grid;grid-template-columns:1fr;gap:16px}
-    @media(min-width:900px){.split{grid-template-columns:2fr 1fr}}
-
-    .card{border:1px solid var(--border);border-radius:var(--radius);padding:14px;background:var(--surface);transition:border-color .12s ease}
-    .card:hover{border-color:color-mix(in oklab,var(--accent) 25%, var(--border))}
-
-    .tags{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 0}
-    .tag{font-size:12px;padding:6px 12px;border-radius:999px;border:1px solid color-mix(in oklab,var(--link) 35%, var(--border));background:color-mix(in oklab,var(--link) 18%, transparent);color:var(--text);font-weight:500}
-
-    /* Projects grid */
-    .projects{display:grid;gap:16px;grid-template-columns:1fr}
-    @media(min-width:760px){.projects{grid-template-columns:repeat(2,1fr)}}
-    @media(min-width:1040px){.projects{grid-template-columns:repeat(3,1fr)}}
-    .project{display:flex;flex-direction:column;gap:8px}
-    .project h3{margin:4px 0 0}
-    .meta{font-size:12px;color:var(--muted)}
-    .pill{display:inline-block;font-size:12px;padding:4px 8px;border:1px solid var(--border);border-radius:999px;background:#fff0}
-    .row{display:flex;flex-wrap:wrap;gap:6px}
-    .project .actions{margin-top:auto}
-
-    /* Research Areas grid */
-    .ra-grid{display:grid;gap:12px;grid-template-columns:1fr}
-    @media(min-width:700px){.ra-grid{grid-template-columns:1fr 1fr}}
-    .ra-item h3{margin:4px 0;font-size:16px}
-    .ra-item p{margin:6px 0 0;color:var(--muted)}
-
-    /* Roles cards */
-    .roles{display:grid;gap:12px}
-    .role-card{border:1px solid var(--border);border-radius:10px;padding:12px;background:var(--surface)}
-    .role-hd{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
-    .role-title{font-weight:700}
-    .role-org{color:var(--muted);font-size:12px}
-    .role-submeta{color:var(--muted);font-size:12px;margin-top:4px}
-    .role-card ul{margin:8px 0 0;padding-left:18px}
-    .role-card li{margin:4px 0}
-
-    /* Skills grid */
-    .skills-grid{display:grid;gap:12px;grid-template-columns:1fr}
-    @media(min-width:760px){.skills-grid{grid-template-columns:1fr 1fr}}
-    @media(min-width:1100px){.skills-grid{grid-template-columns:repeat(3,1fr)}}
-
-    /* Sidebar layout */
-    .layout{display:grid;grid-template-columns:260px 1fr;gap:24px}
-    @media(max-width:900px){.layout{grid-template-columns:1fr}}
-    .sidebar{position:sticky;top:96px;align-self:start}
-    .avatarWrap{width:110px;height:110px;margin:4px auto 8px;position:relative}
-    .avatar-img{width:110px;height:110px;border-radius:999px;object-fit:cover;display:none}
-    .avatar{width:110px;height:110px;border-radius:999px;background:linear-gradient(135deg,var(--accent),#06b6d4);display:grid;place-items:center;margin:4px auto 8px;font-size:40px;font-weight:800;color:#0b1220}
-    .side-name{text-align:center;font-weight:800;margin:6px 0 2px}
-    .side-list{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:8px}
-    .side-list a{display:flex;align-items:center;gap:8px;color:var(--text)}
-    .side-list a:hover{color:var(--link);text-decoration:none}
-    .side-list svg{width:16px;height:16px;fill:currentColor}
-
-    ul.clean{list-style:disc;padding-left:20px;margin:8px 0}
-    li+li{margin-top:8px}
-
-    details{border:1px solid var(--border);border-radius:10px;padding:10px 12px;background:var(--surface)}
-    details+details{margin-top:10px}
-    summary{cursor:pointer;font-weight:600}
-
-    footer{border-top:1px solid var(--border);padding:24px 0;color:var(--muted);text-align:center;background:var(--surface)}
-  </style>
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+</style>
 </head>
 <body>
-  <header>
-    <div class="container nav">
-      <div class="brand"><strong>Kalyan Khatry</strong></div>
-      <nav aria-label="Primary">
-        <a href="#about">About</a>
-        <a href="#pubs">Publications</a>
-        <a href="#experience">Experience</a>
-        <a href="#projects">Projects</a>
-        <a href="#skills">Skills</a>
-        <a href="#contact">Contact</a>
-      </nav>
-      <div class="actions">
-        <a class="iconbtn" href="https://github.com/Kalyan0701" target="_blank" aria-label="GitHub" rel="noopener">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5a12 12 0 0 0-3.79 23.4c.6.11.82-.26.82-.58v-2.02c-3.34.73-4.04-1.61-4.04-1.61-.55-1.41-1.34-1.78-1.34-1.78-1.09-.74.08-.73.08-.73 1.2.08 1.83 1.24 1.83 1.24 1.07 1.84 2.8 1.31 3.48 1 .11-.78.42-1.31.76-1.61-2.67-.31-5.48-1.34-5.48-5.95 0-1.31.47-2.38 1.24-3.22-.12-.31-.54-1.57.12-3.27 0 0 1.01-.32 3.3 1.23a11.4 11.4 0 0 1 6 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.7.24 2.96.12 3.27.77.84 1.24 1.91 1.24 3.22 0 4.62-2.81 5.63-5.49 5.94.43.38.81 1.11.81 2.24v3.32c0 .32.21.7.83.58A12 12 0 0 0 12 .5Z"/></svg>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">K. Khatry</a>
+    <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="#about" onclick="closeMenu()">About</a></li>
+      <li><a href="#research" onclick="closeMenu()">Research</a></li>
+      <li><a href="#publications" onclick="closeMenu()">Publications</a></li>
+      <li><a href="#experience" onclick="closeMenu()">Experience</a></li>
+      <li><a href="#education" onclick="closeMenu()">Education</a></li>
+      <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-bg-2"></div>
+  <div class="hero-layout">
+    <div class="hero-content">
+      <div class="hero-tag">
+        <span class="dot"></span>
+        Incoming Ph.D. Student — Oklahoma State University
+      </div>
+      <h1>Building <em>trustworthy</em> AI for the infrastructure of tomorrow.</h1>
+      <p class="hero-sub">
+        I research explainable, robust, and fair machine learning systems — applying them to bridge inspection, civil infrastructure, and smart cities to create resilient, equitable solutions.
+      </p>
+      <div class="hero-actions">
+        <a href="#publications" class="btn btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          View Publications
         </a>
-        <a class="iconbtn" href="https://www.linkedin.com/in/kalyan-khatry-9aa49a211/" target="_blank" aria-label="LinkedIn" rel="noopener">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.58c0-1.33-.02-3.05-1.86-3.05-1.86 0-2.15 1.45-2.15 2.95v5.68H9.34V9.5h3.41v1.49h.05c.48-.9 1.65-1.86 3.4-1.86 3.64 0 4.31 2.4 4.31 5.53v5.79ZM5.34 8.01a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM3.56 20.45h3.55V9.5H3.56v10.95Z"/></svg>
+        <a href="https://scholar.google.com/citations?hl=en&user=KalyanKhatry" target="_blank" class="btn btn-ghost">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          Google Scholar
         </a>
-        <a class="iconbtn" href="https://scholar.google.com/citations?user=TIO0UvkAAAAJ" target="_blank" aria-label="Google Scholar" rel="noopener">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 1 10l11 7 9-5.73V18h2V10L12 3Zm0 4.18L17.6 11 12 14.82 6.4 11 12 7.18Z"/></svg>
-        </a>
-        
+      </div>
+      <div class="hero-meta">
+        <div class="hero-meta-item">
+          <span class="label">Currently</span>
+          <span class="value">MS in Data Science '25</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="label">Next</span>
+          <span class="value">Ph.D. @ OSU</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="label">Focus</span>
+          <span class="value">AI × Infrastructure</span>
+        </div>
       </div>
     </div>
-  </header>
+    <div class="hero-photo-wrapper">
+      <img src="profile.png" alt="Kalyan Khatry" class="hero-photo">
+    </div>
+  </div>
+</section>
 
-  <main class="container" id="content">
-    <div class="layout">
-      <aside class="sidebar card">
-        <div class="avatarWrap">
-          <img src="profile.png" alt="Kalyan Khatry" class="avatar-img" id="avatarImg">
-<!--           <div class="avatar" id="avatarFallback" aria-hidden="true">KK</div> -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="reveal">
+        <div class="section-header">
+          <p class="section-label">About</p>
+          <h2 class="section-title">Researcher, builder, and lifelong learner.</h2>
         </div>
-        <div class="side-name">Kalyan Khatry</div>
-        <ul class="side-list">
-          <li><a href="mailto:kalyankhatry@outlook.com" aria-label="Email"><svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4-8 5L4 8V6l8 5 8-5v2Z"/></svg>kalyankhatry@outlook.com</a></li>
-          <li><a href="https://www.linkedin.com/in/kalyan-khatry-9aa49a211/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.55v-5.58c0-1.33-.02-3.05-1.86-3.05-1.86 0-2.15 1.45-2.15 2.95v5.68H9.34V9.5h3.41v1.49h.05c.48-.9 1.65-1.86 3.4-1.86 3.64 0 4.31 2.4 4.31 5.53v5.79ZM5.34 8.01a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM3.56 20.45h3.55V9.5H3.56v10.95Z"/></svg>LinkedIn</a></li>
-          <li><a href="https://github.com/Kalyan0701" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24"><path d="M12 .5a12 12 0 0 0-3.79 23.4c.6.11.82-.26.82-.58v-2.02c-3.34.73-4.04-1.61-4.04-1.61-.55-1.41-1.34-1.78-1.34-1.78-1.09-.74.08-.73.08-.73 1.2.08 1.83 1.24 1.83 1.24 1.07 1.84 2.8 1.31 3.48 1 .11-.78.42-1.31.76-1.61-2.67-.31-5.48-1.34-5.48-5.95 0-1.31.47-2.38 1.24-3.22-.12-.31-.54-1.57.12-3.27 0 0 1.01-.32 3.3 1.23a11.4 11.4 0 0 1 6 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.7.24 2.96.12 3.27.77.84 1.24 1.91 1.24 3.22 0 4.62-2.81 5.63-5.49 5.94.43.38.81 1.11.81 2.24v3.32c0 .32.21.7.83.58A12 12 0 0 0 12 .5Z"/></svg>GitHub</a></li>
-          <li><a href="tel:+12038879688" aria-label="Phone"><svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.1.37 2.3.57 3.58.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.85 21 3 13.15 3 3a1 1 0 0 1 1-1h3.49a1 1 0 0 1 1 1c0 1.28.2 2.48.57 3.58a1 1 0 0 1-.24 1.01l-2.2 2.2Z"/></svg>(203) 887-9688</a></li>
-        </ul>
-      </aside>
-      <div class="content">
-    <!-- About -->
-    <section id="about">
-      <h1>Kalyan Khatry</h1>
-      <p class="muted">Graduate Researcher (M.S. Data Science, University of New Haven)</p>
-      <p>I’m a graduate researcher in <strong>AI/ML</strong> and <strong>generative AI (GenAI)</strong>, with focus areas in <strong>explainable AI (XAI)</strong>, <strong>computer vision</strong>, and applied analytics. I build models that are accurate, interpretable, and deployable across domains like infrastructure, health, and education. Current interests include vision transformers, robust explanation evaluation, and practical ML systems.</p>
-      <div class="tags" aria-label="Keywords">
-        <span class="tag">AI/ML</span>
-        <span class="tag">GenAI</span>
-        <span class="tag">XAI</span>
-        <span class="tag">Computer Vision</span>
-        <span class="tag">NLP</span>
-        <span class="tag">Applied Analytics</span>
-        <span class="tag">PyTorch</span>
+        <div class="about-text">
+          <p>I'm Kalyan Khatry — a researcher passionate about making AI systems that are not only powerful, but transparent, fair, and robust enough to trust in the real world. My work sits at the intersection of deep learning, computer vision, and civil infrastructure.</p>
+          <p>As a Graduate Research Assistant at the University of New Haven, I developed custom vision transformer architectures for automated bridge deck inspection using UAV-collected imagery, and integrated explainable AI methods to make these models interpretable for engineers and decision-makers.</p>
+          <p>Beyond research, I value peace, nature, and positive energy. I believe that good science emerges from a grounded mind and a clear purpose — to build technology that genuinely serves people and the planet.</p>
+        </div>
       </div>
-      <div class="card" style="margin-top:16px">
-        <h2>Research Areas <span class="sub">Questions I explore</span></h2>
-        <ul class="clean">
-          <li><strong>How can we trust model explanations?</strong> Designing and stress‑testing XAI methods so explanations track what models actually use.</li>
-          <li><strong>What makes vision models robust?</strong> Building CNN/ViT variants and probing failure modes (blur, scale, texture) to improve reliability.</li>
-          <li><strong>When does GenAI help real tasks?</strong> Using LLMs/diffusion for weak supervision, data synthesis, and rationales, then measuring trade‑offs.</li>
-          <li><strong>How can we reduce bias and improve fairness?</strong> Auditing datasets and models for representation and performance bias; applying mitigation (reweighting, counterfactual augmentation), and tracking fairness metrics alongside accuracy.</li>
-          <li><strong>How do we ship reliably?</strong> Creating lean ML systems: clean data flows, versioning, and decision‑ready analytics.</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- Publications & Presentations -->
-    <section id="pubs">
-      <h2>Publications & Presentations <span class="sub">Selected works</span></h2>
-
-      <div class="card">
-        <h3>Publication</h3>
-        <ul class="clean">
-          <li>
-            Khatry, K., &amp; Samsami, R. (March 2025). <em>Engineering Education in the Era of Generative Artificial Intelligence (Gen AI): Current State and Future Directions.</em> Paper presented at the 2025 Northeast Section Conference, University of Bridgeport, Bridgeport, CT. DOI: <a href="https://doi.org/10.18260/1-2-119.1127-54998" target="_blank" rel="noopener">10.18260/1-2-119.1127-54998</a>.
-          </li>
-        </ul>
-      </div>
-
-      <details open>
-        <summary>Under Submission / In‑Progress</summary>
-        <ul class="clean" style="margin-top:8px">
-          <li>
-            Khatry, K., Elmi, S., &amp; Samsami, R. (2025). <em>Automated concrete bridge deck inspection using unmanned aerial system (UAS)-collected data: A deep learning (DL) approach.</em> Manuscript submitted to ASCE Journal.
-          </li>
-          <li>
-            Khatry, K., Elmi, S., Colin N. Brooks, &amp; Samsami, R. (2026). <em>Transformer‑Based Approach for Automated Concrete Bridge Deck Inspection using UAS‑Collected Data.</em> Manuscript submitted to Construction Research Congress (CRC) 2026.
-          </li>
-          <li>
-            Khatry, K., Brahma, S., Nassar, M., &amp; Samsami, R. (2025). <em>Comparison of XAI Methods in Surface Crack Detection.</em> In‑progress.
-          </li>
-          <li>
-            Khatry, K., Elmi, S., Colin N. Brooks, &amp; Samsami, R. (2026). <em>A Residual Vision Transformer‑Based Framework for Infrastructure Crack Detection.</em> Manuscript submitted to Transportation Research Board (TRB), 2026.
-          </li>
-        </ul>
-      </details>
-
-      <div class="card" style="margin-top:12px">
-        <h3>Poster Presentation</h3>
-        <ul class="clean">
-          <li>
-            <em>Automated Concrete Bridge Deck Inspection Using Unmanned Aerial System (UAS)‑Collected Data: A Deep Learning (DL) Approach.</em> Presented at TCoE Endowment Awards.
-          </li>
-        </ul>
-      </div>
-
-      <div class="card" style="margin-top:12px">
-        <h3>Preprint</h3>
-        <ul class="clean">
-          <li>
-            Khatry, K., &amp; Adhikari, P. <em>Implementing Big Data Analytics for Predicting City‑Level Air Quality Index (AQI) and Examining the Impact of COVID‑19 using Comprehensive PM and Gas Emission Data.</em> Preprint available at ResearchGate. <a href="https://www.researchgate.net/publication/372406390_Implementing_Big_Data_Analytics_for_Predicting_City-Level_Air_Quality_Index_AQI_and_Examining_the_Impact_of_COVID-19_using_Comprehensive_PM_and_Gas_Emission_Data" target="_blank" rel="noopener">Link</a>
-          </li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- Experience -->
-    <section id="experience">
-      <h2>Experience <span class="sub">Roles & impact</span></h2>
-      
-       <div class="role-card">
-          <div class="role-hd">
-            <div class="role-title">Graduate Assistant, Enrollment Analytics</div>
-            <div class="role-org">University of New Haven</div>
+      <div class="reveal" style="transition-delay: 0.15s;">
+        <div class="about-values">
+          <div class="value-card">
+            <span class="icon">🔍</span>
+            <h4>Explainability</h4>
+            <p>Making AI decisions transparent and understandable for all stakeholders.</p>
           </div>
-          <div class="role-submeta">West Haven, CT · Mar 2024–Present</div>
-          <ul>
-            <li> Designed and automated an end-to-end data pipeline using Airflow, Databricks, and PostgreSQL to feed daily
-                refreshed Power BI dashboards (custom DAX, Power Query) for admissions KPIs; improved reporting efficiency by
-                9% and saved 5+ hrs/week</li>
-            <li>Ran SQL and Python scenarios for capacity planning and outreach; produced trend/“what-if” analyses adopted by
-                leadership in weekly reviews.</li>
-            <li>Handled timely communication with hundreds of prospective students on admissions, application procedures, deadlines, and program details.</li>
-          </ul>
-        </div>
-      
-      <div class="roles">
-        <div class="role-card">
-          <div class="role-hd">
-            <div class="role-title">Research Assistant</div>
-            <div class="role-org">Samsami’s Lab</div>
+          <div class="value-card">
+            <span class="icon">⚖️</span>
+            <h4>Fairness</h4>
+            <p>Designing algorithms that produce equitable outcomes across diverse populations.</p>
           </div>
-          <div class="role-submeta">West Haven, CT · Sep 2024–Sep 2025</div>
-          <ul>
-            <li>Improved crack detection accuracy by 7% across multiple benchmarks by developing custom Residual Vision Transformer (RvT), CvT, and CNN models in PyTorch for UAV‑captured bridge imagery.</li>
-            <li>Increased model interpretability by integrating Grad‑CAM and LIME to highlight prediction‑relevant regions, aiding civil engineers in model validation.</li>
-            <li>Reduced false negatives in defect prediction by 15% via exploratory data analysis; identified spatial and texture‑based patterns using OpenCV, Pandas, and NumPy on 40,000+ high‑resolution images.</li>
-          </ul>
-        </div>
-       
-        <div class="role-card">
-          <div class="role-hd">
-            <div class="role-title">Data Analyst (Intern)</div>
-            <div class="role-org">Downtown Evening Soup Kitchen, Inc</div>
+          <div class="value-card">
+            <span class="icon">🛡️</span>
+            <h4>Robustness</h4>
+            <p>Building models resilient to adversarial conditions and distribution shifts.</p>
           </div>
-          <div class="role-submeta">New Haven, CT · Jan 2025–May 2025</div>
-          <ul>
-            <li>Automated workflows using Zapier, Python, and Excel macros, integrating four business systems and reducing reporting time by 17% (4-6+ hours saved weekly).</li>
-            <li>Built Power BI dashboards with custom DAX measures and predictive analytics, enhancing KPI clarity across three departments.</li>
-            <li>Implemented data validation with Cognito Forms and MSSQL, improving accuracy across 5,000+ monthly records.</li>
-          </ul>
-        </div>
-        <div class="role-card">
-          <div class="role-hd">
-            <div class="role-title">Associate Data Engineer</div>
-            <div class="role-org">Krispcall Pte. Ltd</div>
-          </div>
-          <div class="role-submeta">Singapore · Jul 2023–Dec 2023</div>
-          <ul>
-            <li>Integrated Mixpanel with Databricks and Python for automated data retrieval/analysis, enabling insights that supported pricing strategy and a 7% increase in customer acquisition.</li>
-            <li>Led analysis of user interactions via Mixpanel + Python scripts, identifying 20+ fraud instances and improving platform security by 9%.</li>
-            <li>Optimized ETL processes, increasing data processing speed by 15% and supporting faster, more informed decisions.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- Projects -->
-    <section id="projects">
-      <h2>Projects <span class="sub">Selected work</span></h2>
-      <div class="projects">
-        <article class="card project">
-          <div class="meta">CNN · Medical Imaging</div>
-          <h3>Breast Cancer Detection Using Deep Learning</h3>
-          <p class="muted">Implemented LeNet, ResNet50, and VGG16 with advanced augmentation; tuned hyperparameters and used k‑fold cross‑validation on a medical imaging dataset.</p>
-          <div class="row"><span class="pill">LeNet</span><span class="pill">ResNet50</span><span class="pill">VGG16</span><span class="pill">K‑fold CV</span></div>
-          
-        </article>
-        <article class="card project">
-          <div class="meta">NLP · RNN/LSTM</div>
-          <h3>Sentiment Analysis with Recurrent Neural Networks</h3>
-          <p class="muted">Designed and trained an LSTM for sentiment classification on the IMDB reviews dataset; preprocessing pipeline for tokenization, padding, and batching.</p>
-          <div class="row"><span class="pill">LSTM</span><span class="pill">IMDB</span><span class="pill">Text preprocessing</span></div>
-          
-        </article>
-        <article class="card project">
-          <div class="meta">SQL · Power BI</div>
-          <h3>Pizza Sales Analytics Dashboard</h3>
-          <p class="muted">Engineered SQL‑based KPI analytics and Power BI dashboards to track revenue, order values, and sales trends across sizes and types.</p>
-          <div class="row"><span class="pill">ETL</span><span class="pill">DAX</span><span class="pill">Visualization</span></div>
-          
-        </article>
-        <article class="card project">
-          <div class="meta">AWS · Spark</div>
-          <h3>Data Engineering Pipeline (AWS & Apache Spark)</h3>
-          <p class="muted">Implemented scalable data pipelines and ETL using AWS Lambda for storage/processing, and Apache Spark to analyze a YouTube and Healthcare dataset.</p>
-          <div class="row"><span class="pill">Lambda</span><span class="pill">S3</span><span class="pill">Spark</span></div>
-          
-        </article>
-        <article class="card project">
-          <div class="meta">Health Analytics · R</div>
-          <h3>Esophageal Cancer Dataset Analysis</h3>
-          <p class="muted">Exploratory analysis and modeling on an esophageal cancer dataset; data cleaning, visualization, and statistical testing in R.</p>
-          <div class="row"><span class="pill">R</span><span class="pill">EDA</span><span class="pill">Stats</span></div>
-        </article>
-        <article class="card project">
-          <div class="meta">Health Analytics · R</div>
-          <h3>Employment & Mortality Analysis (R)</h3>
-          <p class="muted">Data exploration and modeling to examine relationships between employment indicators and mortality outcomes using R.</p>
-          <div class="row"><span class="pill">R</span><span class="pill">Regression</span><span class="pill">Visualization</span></div>
-<!--           <div class="actions"><a class="iconbtn" href="#" onclick="alert('Add report or repo link.'); return false;" aria-label="View report"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h18v18H3V3Zm2 2v14h14V5H5Zm2 2h2v10H7V7Zm4 4h2v6h-2v-6Zm4-3h2v9h-2V8Z"/></svg></a></div> -->
-        </article>
-      </div>
-    </section>
-
-    <!-- Skills -->
-    <section id="skills">
-      <h2>Skills <span class="sub">Tools & competencies</span></h2>
-      <div class="skills-grid">
-        <div class="card">
-          <h3>Programming & ML</h3>
-          <div class="tags">
-            <span class="tag">Python</span><span class="tag">R</span><span class="tag">SQL</span>
-            <span class="tag">PyTorch</span><span class="tag">TensorFlow/Keras</span><span class="tag">scikit‑learn</span>
-            <span class="tag">Pandas</span><span class="tag">NumPy</span><span class="tag">Matplotlib</span><span class="tag">Plotly</span>
+          <div class="value-card">
+            <span class="icon">🌿</span>
+            <h4>Sustainability</h4>
+            <p>Optimizing for efficiency — both computational and environmental.</p>
           </div>
         </div>
-        <div class="card">
-          <h3>Data & Cloud</h3>
-          <div class="tags">
-            <span class="tag">AWS</span><span class="tag">Spark</span><span class="tag">MongoDB</span>
-            <span class="tag">PostgreSQL</span><span class="tag">Git</span><span class="tag">Airflow (learning)</span>
-          </div>
-        </div>
-        <div class="card">
-          <h3>BI & Analytics</h3>
-          <div class="tags">
-            <span class="tag">Power BI</span><span class="tag">Tableau</span><span class="tag">Excel (advanced)</span>
-            <span class="tag">DAX</span><span class="tag">ETL/ELT</span>
-          </div>
-        </div>
-        <div class="card">
-          <h3>Research & Communication</h3>
-          <div class="tags">
-            <span class="tag">Research design</span><span class="tag">Experimental evaluation</span>
-            <span class="tag">Academic writing</span><span class="tag">Data storytelling</span>
-            <span class="tag">Public speaking</span><span class="tag">Teaching</span><span class="tag">Collaboration</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact -->
-    <section id="contact">
-      <h2>Contact <span class="sub">Let’s connect</span></h2>
-      <div class="card">
-        <p><strong>Email:</strong> <a href="mailto:kalyankhatry@outlook.com">kalyankhatry@outlook.com</a></p>
-        <p>
-          <a class="iconbtn" href="https://github.com/Kalyan0701" target="_blank" aria-label="GitHub" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5a12 12 0 0 0-3.79 23.4c.6.11.82-.26.82-.58v-2.02c-3.34.73-4.04-1.61-4.04-1.61-.55-1.41-1.34-1.78-1.34-1.78-1.09-.74.08-.73.08-.73 1.2.08 1.83 1.24 1.83 1.24 1.07 1.84 2.8 1.31 3.48 1 .11-.78.42-1.31.76-1.61-2.67-.31-5.48-1.34-5.48-5.95 0-1.31.47-2.38 1.24-3.22-.12-.31-.54-1.57.12-3.27 0 0 1.01-.32 3.3 1.23a11.4 11.4 0 0 1 6 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.7.24 2.96.12 3.27.77.84 1.24 1.91 1.24 3.22 0 4.62-2.81 5.63-5.49 5.94.43.38.81 1.11.81 2.24v3.32c0 .32.21.7.83.58A12 12 0 0 0 12 .5Z"/></svg></a>
-          <a class="iconbtn" href="https://www.linkedin.com/in/kalyan-khatry-9aa49a211/" target="_blank" aria-label="LinkedIn" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.58c0-1.33-.02-3.05-1.86-3.05-1.86 0-2.15 1.45-2.15 2.95v5.68H9.34V9.5h3.41v1.49h.05c.48-.9 1.65-1.86 3.4-1.86 3.64 0 4.31 2.4 4.31 5.53v5.79ZM5.34 8.01a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM3.56 20.45h3.55V9.5H3.56v10.95Z"/></svg></a>
-          <a class="iconbtn" href="https://scholar.google.com/citations?user=TIO0UvkAAAAJ" target="_blank" aria-label="Google Scholar" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 1 10l11 7 9-5.73V18h2V10L12 3Zm0 4.18L17.6 11 12 14.82 6.4 11 12 7.18Z"/></svg></a>
-        </p>
-        <p class="muted">Location: New Haven, CT · Last updated: Aug 11, 2025</p>
-      </div>
-    </section>
       </div>
     </div>
-  </main>
+  </div>
+</section>
 
-  <footer>
-    <div class="container">© <span id="year"></span> Kalyan Khatry · GitHub Pages</div>
-  </footer>
-  <script>
-    // Year + active nav state + avatar load
-    document.getElementById('year').textContent = new Date().getFullYear();
-    const sections = Array.from(document.querySelectorAll('main section'));
-    const navLinks = Array.from(document.querySelectorAll('header nav a'));
-    const map = new Map(navLinks.map(a => [a.getAttribute('href').slice(1), a]));
-    const onScroll = () => {
-      const y = window.scrollY + 120; // offset for sticky header
-      let current = sections[0]?.id;
-      for (const s of sections) {
-        if (s.offsetTop <= y) current = s.id;
-      }
-      navLinks.forEach(a => a.classList.remove('active'));
-      if (map.get(current)) map.get(current).classList.add('active');
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
+<section id="research">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="section-label">Research Interests</p>
+      <h2 class="section-title">Where AI meets the physical world.</h2>
+    </div>
+    <div class="research-areas">
+      <div class="research-card reveal">
+        <span class="num">01</span>
+        <h3>AI for Infrastructure</h3>
+        <p>Applying deep learning and computer vision to automated inspection of bridges, roads, and critical civil infrastructure using drone-collected imagery.</p>
+      </div>
+      <div class="research-card reveal" style="transition-delay: 0.1s;">
+        <span class="num">02</span>
+        <h3>Explainable AI</h3>
+        <p>Developing interpretable models and explanation methods (LIME, attention maps) to build trust and transparency in high-stakes engineering decisions.</p>
+      </div>
+      <div class="research-card reveal" style="transition-delay: 0.2s;">
+        <span class="num">03</span>
+        <h3>Optimization & Efficiency</h3>
+        <p>Building efficient architectures optimized for edge deployment and real-time inference under resource constraints in field environments.</p>
+      </div>
+      <div class="research-card reveal" style="transition-delay: 0.3s;">
+        <span class="num">04</span>
+        <h3>Algorithmic Fairness</h3>
+        <p>Designing bias mitigation techniques and fair learning algorithms to ensure equitable outcomes in AI-driven infrastructure decisions.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-    const avatarImg = document.getElementById('avatarImg');
-    const avatarFallback = document.getElementById('avatarFallback');
-    if (avatarImg) {
-      avatarImg.addEventListener('load', () => {
-        avatarImg.style.display = 'block';
-        if (avatarFallback) avatarFallback.style.display = 'none';
-      });
-      avatarImg.addEventListener('error', () => {
-        // keep fallback
-      });
-    }
-  </script>
+<section id="publications">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="section-label">Publications</p>
+      <h2 class="section-title">Selected works.</h2>
+    </div>
+    <div class="pub-list reveal">
+      <div class="pub-item">
+        <span class="pub-type">journal</span>
+        <div class="pub-info">
+          <h4><a href="https://doi.org/10.1061/AOMJAH.AOENG-0091" target="_blank">Automated concrete bridge deck inspection using unmanned aerial system–collected data: A deep learning approach</a></h4>
+          <span class="venue">ASCE Open: Multidisciplinary Journal of Civil Engineering, 4(1)</span>
+          <div><a href="https://doi.org/10.1061/AOMJAH.AOENG-0091" target="_blank" class="pub-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> DOI</a></div>
+        </div>
+        <span class="pub-year">2026</span>
+      </div>
+      <div class="pub-item">
+        <span class="pub-type">conference</span>
+        <div class="pub-info">
+          <h4>A Residual Vision Transformer-Based Framework for Infrastructure Crack Detection</h4>
+          <span class="venue">Transportation Research Board (TRB), 2026</span>
+        </div>
+        <span class="pub-year">2026</span>
+      </div>
+      <div class="pub-item">
+        <span class="pub-type">conference</span>
+        <div class="pub-info">
+          <h4>Transformer-based approach for automated concrete bridge deck inspection using UAS-collected data</h4>
+          <span class="venue">Construction Research Congress (CRC), 2026</span>
+        </div>
+        <span class="pub-year">2026</span>
+      </div>
+      <div class="pub-item">
+        <span class="pub-type">conference</span>
+        <div class="pub-info">
+          <h4><a href="https://doi.org/10.18260/1-2-119.1127-54998" target="_blank">Engineering Education in the Era of Generative Artificial Intelligence: Current State and Future Directions</a></h4>
+          <span class="venue">ASEE 2025 Northeast Section Conference, University of Bridgeport</span>
+          <div><a href="https://doi.org/10.18260/1-2-119.1127-54998" target="_blank" class="pub-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> DOI</a></div>
+        </div>
+        <span class="pub-year">2025</span>
+      </div>
+      <div class="pub-item">
+        <span class="pub-type preprint">preprint</span>
+        <div class="pub-info">
+          <h4><a href="https://doi.org/10.5281/zenodo.19376795" target="_blank">Comparative Evaluation of Generative Augmentation Techniques for Imbalanced Concrete Damage Segmentation</a></h4>
+          <span class="venue">Zenodo</span>
+          <div><a href="https://doi.org/10.5281/zenodo.19376795" target="_blank" class="pub-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> DOI</a></div>
+        </div>
+        <span class="pub-year">2026</span>
+      </div>
+      <div class="pub-item">
+        <span class="pub-type preprint">preprint</span>
+        <div class="pub-info">
+          <h4><a href="https://doi.org/10.13140/RG.2.2.17795.67365" target="_blank">Implementing Big Data Analytics for Predicting City-Level Air Quality Index and Examining the Impact of COVID-19</a></h4>
+          <span class="venue">ResearchGate</span>
+          <div><a href="https://doi.org/10.13140/RG.2.2.17795.67365" target="_blank" class="pub-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> DOI</a></div>
+        </div>
+        <span class="pub-year">2026</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="section-label">Experience</p>
+      <h2 class="section-title">Where I've contributed.</h2>
+    </div>
+    <div class="timeline reveal">
+      <div class="timeline-item">
+        <div class="date">Sep 2024 — Sep 2025</div>
+        <h3>Graduate Research Assistant</h3>
+        <div class="org">Samsami's Lab · University of New Haven</div>
+        <ul>
+          <li>Developed custom Residual Vision Transformer (RvT) model in PyTorch, improving crack detection accuracy by 4% across multiple benchmarks.</li>
+          <li>Integrated explainable AI methods (LIME) for interpretable defect detection on UAV-captured bridge imagery.</li>
+          <li>Performed EDA on 40,000+ high-resolution images using OpenCV, Pandas, and NumPy.</li>
+          <li>Co-authored 4 accepted papers (ASCE Journal, TRB, CRC, ASEE) with 1 manuscript under review.</li>
+        </ul>
+      </div>
+      <div class="timeline-item">
+        <div class="date">Jan 2025 — May 2025</div>
+        <h3>Data Analyst Intern</h3>
+        <div class="org">Downtown Evening Soup Kitchen · New Haven, CT</div>
+        <ul>
+          <li>Built Power BI dashboards with custom DAX measures and predictive analytics.</li>
+          <li>Automated data workflows integrating 4 business systems using Python and Zapier.</li>
+          <li>Implemented data validation protocols improving accuracy across 30,000+ monthly records.</li>
+        </ul>
+      </div>
+      <div class="timeline-item">
+        <div class="date">Jul 2023 — Dec 2023</div>
+        <h3>Associate Data Engineer</h3>
+        <div class="org">Krispcall Pte. Ltd · Singapore</div>
+        <ul>
+          <li>Developed and optimized ETL pipelines for faster business intelligence decisions.</li>
+          <li>Analyzed user behavior with Mixpanel, identifying 20+ fraud instances.</li>
+          <li>Built automated data retrieval systems for customer insights and market strategy.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="section-label">Education</p>
+      <h2 class="section-title">Academic path.</h2>
+    </div>
+    <div class="edu-grid reveal">
+      <div class="edu-card">
+        <div class="degree">Ph.D. (Incoming)</div>
+        <div class="school">Oklahoma State University</div>
+        <div class="details">Focus on AI in infrastructure, optimization, and explainable AI.</div>
+      </div>
+      <div class="edu-card">
+        <div class="degree">M.S. in Data Science</div>
+        <div class="school">University of New Haven</div>
+        <div class="details">Tagliatela College of Engineering · Dec 2025</div>
+        <div class="gpa">GPA 3.79</div>
+      </div>
+      <div class="edu-card">
+        <div class="degree">B.S. in Computer Science</div>
+        <div class="school">University of Wolverhampton</div>
+        <div class="details">Final project: Deep learning for breast cancer detection · June 2023</div>
+        <div class="gpa">GPA 4.0</div>
+      </div>
+      <div class="edu-card" style="background: var(--accent-bg); border-color: var(--accent);">
+        <div class="degree" style="font-size: 1.1rem;">Selected Honors</div>
+        <div class="details" style="margin-top: 0.5rem;">
+          TCoE Endowed Graduate Research Fellowship · Dean's Scholarship, UNH · AAA Scholarship, UoW · IEEE ETECOM Paper Reviewer
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="section-label">Technical Skills</p>
+      <h2 class="section-title">Tools of the trade.</h2>
+    </div>
+    <div class="skills-grid reveal">
+      <div class="skill-group">
+        <h4>Languages</h4>
+        <div class="skill-tags">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">R</span>
+          <span class="skill-tag">SQL</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>ML / DL Frameworks</h4>
+        <div class="skill-tags">
+          <span class="skill-tag">PyTorch</span>
+          <span class="skill-tag">TensorFlow</span>
+          <span class="skill-tag">Keras</span>
+          <span class="skill-tag">Scikit-Learn</span>
+          <span class="skill-tag">OpenCV</span>
+          <span class="skill-tag">NLTK</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Data & Visualization</h4>
+        <div class="skill-tags">
+          <span class="skill-tag">Pandas</span>
+          <span class="skill-tag">NumPy</span>
+          <span class="skill-tag">SciPy</span>
+          <span class="skill-tag">Matplotlib</span>
+          <span class="skill-tag">Seaborn</span>
+          <span class="skill-tag">Plotly</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Tools & Platforms</h4>
+        <div class="skill-tags">
+          <span class="skill-tag">Git</span>
+          <span class="skill-tag">AWS</span>
+          <span class="skill-tag">Apache Spark</span>
+          <span class="skill-tag">Power BI</span>
+          <span class="skill-tag">Tableau</span>
+          <span class="skill-tag">Jira</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Core Competencies</h4>
+        <div class="skill-tags">
+          <span class="skill-tag">Deep Learning</span>
+          <span class="skill-tag">Computer Vision</span>
+          <span class="skill-tag">Explainable AI</span>
+          <span class="skill-tag">Model Optimization</span>
+          <span class="skill-tag">ETL Pipelines</span>
+          <span class="skill-tag">Statistical Analysis</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact-section">
+  <div class="container reveal">
+    <p class="section-label">Contact</p>
+    <h2 class="section-title">Let's connect.</h2>
+    <p>I'm always open to discussing research collaborations, new ideas, or just a good conversation about AI and its impact on the world.</p>
+    <div class="contact-links">
+      <a href="mailto:kalyankhatry@outlook.com" class="contact-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22,4 12,13 2,4"/></svg>
+        kalyankhatry@outlook.com
+      </a>
+      <a href="https://scholar.google.com/citations?hl=en&user=KalyanKhatry" target="_blank" class="contact-link">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/></svg>
+        Google Scholar
+      </a>
+      <a href="https://github.com/kalyankhatry" target="_blank" class="contact-link">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+        GitHub
+      </a>
+      <a href="https://linkedin.com/in/kalyankhatry" target="_blank" class="contact-link">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-leaf">🍃</div>
+  <p>&copy; 2026 Kalyan Khatry. Crafted with intention and good energy.</p>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => observer.observe(el));
+
+  function closeMenu() {
+    document.querySelector('.nav-links').classList.remove('open');
+  }
+
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('nav');
+    nav.style.boxShadow = window.scrollY > 20 ? '0 1px 12px rgba(0,0,0,0.05)' : 'none';
+  });
+</script>
 </body>
 </html>
